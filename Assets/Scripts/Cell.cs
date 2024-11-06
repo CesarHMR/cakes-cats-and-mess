@@ -7,6 +7,7 @@ public class Cell : MonoBehaviour
     public bool isBomb;
     public bool isPrize;
     public bool isOpen;
+    public bool isFlag;
 
     public int index;
     public int bombsArround;
@@ -20,6 +21,8 @@ public class Cell : MonoBehaviour
     [SerializeField] Color _emptyColor;
     [SerializeField] Color _bombColor;
     [SerializeField] Color _prizeColor;
+
+    [SerializeField] GameObject _flag;
 
 
     [SerializeField] Color _defaultTextColor;
@@ -35,7 +38,10 @@ public class Cell : MonoBehaviour
         if (!isOpen)
             GridManager.OnOpenCell.Invoke(index);
     }
-
+    public void ShowFlag()
+    {
+        _flag.SetActive(isFlag);
+    }
     public void ShowCell()
     {
         isOpen = true;

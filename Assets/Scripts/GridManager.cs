@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GridManager : MonoBehaviour
 {
+    public bool flag;
     [SerializeField] int _xSize;
     [SerializeField] int _ySize;
     [SerializeField] int _bombsAmount;
@@ -40,6 +41,16 @@ public class GridManager : MonoBehaviour
 
     void ClearArea(int index)
     {
+        if (_canPlay == false) return;
+
+        if (flag)
+        {
+            _gameCells[index].isFlag = !_gameCells[index].isFlag;
+            _gameCells[index].ShowFlag();
+            return;
+        }
+
+        if (_gameCells[index].isFlag) return;
 
         AddAndCheckArround(index);
 
@@ -78,12 +89,8 @@ public class GridManager : MonoBehaviour
 
         for (int i = 0; i < cellsArround.Length; i++)
         {
-            Debug.Log("Check");
-            Debug.Log(cellsArround[i] != null);
-            Debug.Log(!_cellsToOpen.Contains(cellsArround[i]));
-            if (cellsArround[i] != null && !_cellsToOpen.Contains(cellsArround[i]))
+            if (cellsArround[i] != null && !_cellsToOpen.Contains(cellsArround[i]) && !cellsArround[i].isFlag)
             {
-                Debug.Log("Add");
                 AddAndCheckArround(cellsArround[i].index);
             }
         }

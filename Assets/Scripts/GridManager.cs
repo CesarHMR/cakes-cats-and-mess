@@ -16,12 +16,15 @@ public class GridManager : MonoBehaviour
     int flagsOnTile;
     int discoveredPrizes;
     bool _canPlay = true;
+    bool isPlaying = false;
 
     [SerializeField] TextMeshProUGUI _textBomb;
     [SerializeField] TextMeshProUGUI _textPrize;
     [SerializeField] TextMeshProUGUI _textPrizeCollected;
     [SerializeField] GameObject _winPanel;
     [SerializeField] GameObject _losePanel;
+
+    [SerializeField] Timer _timer;
 
     Cell[] _gameCells;
     GridBuilder _gridBuilder;
@@ -43,6 +46,13 @@ public class GridManager : MonoBehaviour
 
     void ClearArea(int index)
     {
+        if(isPlaying == false)
+        {
+            isPlaying = true;
+            _timer.StartTimer();
+        }
+
+
         if (_canPlay == false) return;
 
         if (flag)
@@ -118,6 +128,7 @@ public class GridManager : MonoBehaviour
             {
                 Debug.Log("Lose");
                 _losePanel.SetActive(true);
+                _timer.StopTimer();
             }
 
             if (!cell.isBomb && !cell.isPrize && !cell.isOpen)
@@ -139,6 +150,7 @@ public class GridManager : MonoBehaviour
 
             _textPrizeCollected.SetText(collected + " of " + _prizesAmount);
             _winPanel.SetActive(true);
+            _timer.StopTimer();
         }
     }
 

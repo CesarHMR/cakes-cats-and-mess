@@ -49,7 +49,7 @@ public class GridBuilder : MonoBehaviour
 
         for (int i = 0; i < xSize * ySize; i++)
         {
-            int left = GetLeft(i,xSize);
+            int left = GetLeft(i, xSize);
             int right = GetRight(i, xSize, cells);
             int top = GetTop(i, xSize);
             int bot = GetBot(i, xSize);
@@ -82,8 +82,9 @@ public class GridBuilder : MonoBehaviour
             cells[i].prizesArround = prizesArround;
             cells[i].index = i;
         }
-
-        _layoutGroup.cellSize = new Vector2(_rectTransform.rect.width / xSize, _rectTransform.rect.height / ySize);
+        float xSpacing = (xSize - 1) * _layoutGroup.spacing.x;
+        float ySpacing = (ySize - 1) * _layoutGroup.spacing.y;
+        _layoutGroup.cellSize = new Vector2((_rectTransform.rect.width - xSpacing) / xSize, (_rectTransform.rect.height - ySpacing) / ySize);
 
         return cells;
     }

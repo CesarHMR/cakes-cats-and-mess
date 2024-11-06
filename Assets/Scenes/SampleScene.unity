@@ -1490,9 +1490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901974f0b73653846affe7f9d20af820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xSize: 8
+  _xSize: 10
   _ySize: 16
-  _bombsAmount: 12
+  _bombsAmount: 20
   _prizesAmount: 4
   _timeBetweenShow: 0.05
   _textBomb: {fileID: 1107106129}

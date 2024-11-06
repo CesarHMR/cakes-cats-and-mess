@@ -1,3 +1,4 @@
+using audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ public class Cell : MonoBehaviour
     public void ShowFlag()
     {
         _flag.SetActive(isFlag);
+        AudioManager.Instance.PlaySound("flag");
     }
     public void ShowCell()
     {
@@ -48,14 +50,17 @@ public class Cell : MonoBehaviour
 
         if (isBomb)
         {
+            AudioManager.Instance.PlaySound("bomb revealed");
             image.color = _bombColor;
         }
         else if (isPrize)
         {
+            AudioManager.Instance.PlaySound("prize revealed");
             image.color = _prizeColor;
         }
         else
         {
+            AudioManager.Instance.PlaySound("tile revealed");
             image.color = _emptyColor;
         }
 

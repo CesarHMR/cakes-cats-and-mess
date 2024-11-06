@@ -1,3 +1,4 @@
+using audio;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,5 +14,7 @@ public class Switch : MonoBehaviour
         _gridManager.flag = !_gridManager.flag;
 
         _textMeshPro.SetText(_gridManager.flag ? "flag" : "reveal");
+
+        AudioManager.Instance.PlaySound("button");
     }
 }

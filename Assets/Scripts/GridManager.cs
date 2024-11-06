@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] int _bombsAmount;
     [SerializeField] int _prizesAmount;
     [SerializeField] float _timeBetweenShow;
+    int flagsOnTile;
+    int discoveredPrizes;
     bool _canPlay = true;
 
     [SerializeField] TextMeshProUGUI _textBomb;
@@ -47,10 +49,20 @@ public class GridManager : MonoBehaviour
         {
             _gameCells[index].isFlag = !_gameCells[index].isFlag;
             _gameCells[index].ShowFlag();
+
+            flagsOnTile += _gameCells[index].isFlag ? 1 : -1;
+            _textBomb.SetText((_bombsAmount - flagsOnTile).ToString());
+
             return;
         }
 
         if (_gameCells[index].isFlag) return;
+
+        if (_gameCells[index].isPrize)
+        {
+            discoveredPrizes++;
+            _textPrize.SetText((_prizesAmount - discoveredPrizes).ToString());
+        }
 
         AddAndCheckArround(index);
 

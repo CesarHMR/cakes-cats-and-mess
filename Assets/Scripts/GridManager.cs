@@ -158,6 +158,10 @@ public class GridManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 
     public class CellEvent : UnityEvent<int> { }
 

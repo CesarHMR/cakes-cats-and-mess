@@ -26,12 +26,12 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] Timer _timer;
 
-    Cell[] _gameCells;
+    TileAppearence[] _gameCells;
     GridBuilder _gridBuilder;
 
     public static CellEvent OnOpenCell = new CellEvent();
 
-    List<Cell> _cellsToOpen = new List<Cell>();
+    List<TileAppearence> _cellsToOpen = new List<TileAppearence>();
 
     private void Awake()
     {
@@ -83,7 +83,7 @@ public class GridManager : MonoBehaviour
     IEnumerator ShowCellsGradually()
     {
         _canPlay = false;
-        foreach (Cell cell in _cellsToOpen)
+        foreach (TileAppearence cell in _cellsToOpen)
         {
             cell.ShowCell();
             yield return new WaitForSeconds(_timeBetweenShow);
@@ -98,7 +98,7 @@ public class GridManager : MonoBehaviour
 
         if (_gameCells[index].ItemsArround != 0 || _gameCells[index].isBomb || _gameCells[index].isPrize) return;
 
-        Cell[] cellsArround = new Cell[8];
+        TileAppearence[] cellsArround = new TileAppearence[8];
 
         cellsArround[0] = GetLeft(index, _xSize) >= 0 && GetLeft(index, _xSize) < _gameCells.Length ? _gameCells[GetLeft(index, _xSize)] : null;
         cellsArround[1] = GetRight(index, _xSize, _gameCells) >= 0 && GetRight(index, _xSize, _gameCells) < _gameCells.Length ? _gameCells[GetRight(index, _xSize, _gameCells)] : null;
@@ -183,7 +183,7 @@ public class GridManager : MonoBehaviour
         return index - 1;
     }
 
-    int GetRight(int index, int xSize, Cell[] cells)
+    int GetRight(int index, int xSize, TileAppearence[] cells)
     {
         if (index + 1 >= cells.Length) return -1;
 

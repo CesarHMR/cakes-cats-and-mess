@@ -11,9 +11,9 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] GridLayoutGroup _layoutGroup;
     [SerializeField] RectTransform _rectTransform;
 
-    public Cell[] BuildGrid(int xSize, int ySize, int bombsAmount, int prizesAmount)
+    public TileAppearence[] BuildGrid(int xSize, int ySize, int bombsAmount, int prizesAmount)
     {
-        Cell[] cells = new Cell[xSize * ySize];
+        TileAppearence[] cells = new TileAppearence[xSize * ySize];
 
         List<int> allCells = new List<int>();
 
@@ -41,7 +41,7 @@ public class GridBuilder : MonoBehaviour
 
         for (int i = 0; i < xSize * ySize; i++)
         {
-            cells[i] = Instantiate(_cellPrefab, transform).GetComponent<Cell>();
+            cells[i] = Instantiate(_cellPrefab, transform).GetComponent<TileAppearence>();
 
             cells[i].isBomb = bombsIndex.Contains(i);
             cells[i].isPrize = prizesIndex.Contains(i);
@@ -107,7 +107,7 @@ public class GridBuilder : MonoBehaviour
         return index - 1;
     }
 
-    int GetRight(int index, int xSize, Cell[] cells)
+    int GetRight(int index, int xSize, TileAppearence[] cells)
     {
         if (index + 1 >= cells.Length) return -1;
 
